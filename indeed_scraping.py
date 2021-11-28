@@ -101,7 +101,6 @@ def job_scraping(keyword, historical_depth):
             captcha = True
             break
 
-
         for job_id in job_list:
             d_job = get_job_infos(soup, job_id)
             data.append(list(d_job.values()))
