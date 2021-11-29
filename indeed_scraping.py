@@ -91,7 +91,7 @@ def job_scraping(keyword, historical_depth):
 
         # print(url)
         html_text = requests.get(url).text
-        print(html_text)
+        # print(html_text)
         soup = BeautifulSoup(html_text, 'lxml')
         job_list = get_job_ids(soup)
 
