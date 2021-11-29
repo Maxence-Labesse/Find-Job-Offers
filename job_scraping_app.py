@@ -5,7 +5,7 @@ from tkinter import messagebox
 
 # First widget: global window
 root = Tk()
-root.title("Find job offers app")
+root.title("Find job offers")
 style = ttk.Style()
 style.theme_use('clam')
 root.geometry('300x120')
