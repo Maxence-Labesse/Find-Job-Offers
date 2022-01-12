@@ -1,12 +1,17 @@
-# Interval Learning Flashcards
+# Find Job Offers
 ![Demo](images/demo.gif)
 
-> A Python application for [space repetition](https://en.wikipedia.org/wiki/Spaced_repetition)
-> that asks you 2 random questions per day
-> 
-> Based on the Leitner system, newly introduced and more difficult questions are shown more frequently,
-> while older and less difficult ones are shown less frequently in 
-> order to exploit the psychological spacing effect.
+> A Python application to collect offers information from indeed.fr website
+> All you have to do is to define a job keyword and period of time and get
+> results in an Execel (.xlsx) file.
+
+`Disclaimer :` 
+- Web Scraping may be against the <ins>terms of use</ins> of some websites a
+  nd users may be subject to legal ramifications depending on where and how 
+  they attempt to scrape information.
+- So, Always inspect the Robots.txt as many websites specifies what is 
+  considered as good behaviour on that site, such as areas that are allowed 
+  to be crawled, restricted pages, and frequency limits for crawling.
 
 ## Installation (Windows)
 git clone the project, then install package requirements:
@@ -23,25 +28,17 @@ Using terminal (at project root):
 mkdir data
 py -m flashcards.update_database create
 ```
-#### 2. feed database with questions
-* First, you have to fill your questions in an Excel file, with this structure:
-![Excel_structure](images/XL_structure.PNG)
-/!\ 'Imported' column has to be empty.
-After the import, the program will fill the cell with "OK".
-
-* Then, using terminal (at project root):
-```shell
-py -m flashcards.update_database update *Excel_file.xlsx*
-
-```
-Note: If you need to import new questions in the database, just add it to
-the Excel file and execute the same command.
 
 ## Usage
-A good to use this app is to set a daily task on Windows with[Task Scheduler](https://www.windowscentral.com/how-create-automated-task-using-task-scheduler-windows-10),
-with action like: 
-![Action](images/TaskSchedulerAction.PNG)
-
+Using terminal (at project root):
+```shell
+py -m src.main
+```
+Note: You can add time between web page requests using 
+`time_between_requets` argument as follow:
+```shell
+py -m src.main time_between_offers=True
+```
 ## Release History
 * 0.0.1
     * First realease
@@ -52,4 +49,4 @@ LABESSE Maxence - maxence.labesse@yahoo.fr
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
 
-[https://github.com/Maxence-Labesse/Flashcard-Interval-Learning]()
+[https://github.com/Maxence-Labesse/Find-Job-Offers]()

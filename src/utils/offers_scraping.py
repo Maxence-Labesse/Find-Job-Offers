@@ -18,9 +18,11 @@ import requests
 from datetime import datetime, timedelta
 import pandas as pd
 from datetime import date
+import time
+import random
 
 
-def collect_offers(job_to_search, offers_days_depth):
+def collect_offers(job_to_search, offers_days_depth, time_between_requests=False):
     """get offers informations for a job keyword and a
        specific period of time.
 
@@ -32,6 +34,9 @@ def collect_offers(job_to_search, offers_days_depth):
         job desired
     offers_days_depth: int
         max days from today
+    time_between_requests: bool
+        If True, random time (1 to 3 seconds) between each
+        request
 
     Returns
     -------
@@ -62,18 +67,22 @@ def collect_offers(job_to_search, offers_days_depth):
         # it got blocked by website
         # else, get offers information
         l_offers_ids = get_offer_ids(soup)
-        if l_offers_ids is not None:
+        if l_offers_ids is None:
             request_got_blocked = True
             return request_got_blocked
         else:
-            for offer in l_offers_ids:
-                d_offer_infos = get_offer_info(soup, offer)
+            for offer_id in l_offers_ids:
+                d_offer_infos = get_offer_info(soup, offer_id)
                 l_offers_infos.append(list(d_offer_infos.values()))
 
             # update last_offer_date, current_page and next url
             last_offer_date = d_offer_infos['date']
             url = build_indeed_url(job_to_search, current_page)
             current_page += 1
+
+        if time_between_requests:
+            random_time = random.randint(100, 300) / 100
+            time.sleep(random_time)
 
     # store offers informations in .xlsx file
     df = pd.DataFrame(l_offers_infos, columns=['Title', 'Company', 'Date', 'Link'])
@@ -126,9 +135,10 @@ def get_offer_ids(soup):
         try:
             if a["id"].startswith("job_"):
                 l_offer_ids.append(a["id"])
-            return l_offer_ids
         except KeyError:
-            return None
+            pass
+
+    return l_offer_ids
 
 
 def get_offer_info(soup, offer_id):
@@ -155,7 +165,10 @@ def get_offer_info(soup, offer_id):
 
     # get title
     job_title_zone = a.find("h2", class_="jobTitle jobTitle-color-purple jobTitle-newJob")
-    title = [span.text for span in job_title_zone.find_all("span")][1]
+    try:
+        title = [span.text for span in job_title_zone.find_all("span")][1]
+    except:
+        title = "Not found"
 
     # get company name
     try:
@@ -167,12 +180,15 @@ def get_offer_info(soup, offer_id):
             company = "Not found"
 
     # get published date
-    offer_date_info = a.find("span", class_="date").text[6:]
-    if offer_date_info in ["Publiée à l'instant", "Aujourd'hui"]:
+    try:
+        offer_date_info = a.find("span", class_="date").text[6:]
+        if offer_date_info in ["Publiée à l'instant", "Aujourd'hui"]:
+            published_date = datetime.today().strftime('%Y-%m-%d')
+        else:
+            days_before = offer_date_info.split(" ")[3]
+            published_date = (datetime.today() - timedelta(days=int(days_before))).strftime('%Y-%m-%d')
+    except:
         published_date = datetime.today().strftime('%Y-%m-%d')
-    else:
-        days_before = offer_date_info.split(" ")[3]
-        published_date = (datetime.today() - timedelta(days=int(days_before))).strftime('%Y-%m-%d')
 
     # get link
     raw_link = a.get("href")
