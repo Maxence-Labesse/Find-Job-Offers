@@ -15,20 +15,11 @@
 
 ## Installation (Windows)
 git clone the project, then install package requirements:
+
 Using terminal:
 ```
 py -m pip install -r requirements.txt
 ```
-
-## Setings
-Before using the app, you have to create the database and feed it with your questions
-#### 1. create database
-Using terminal (at project root):
-```shell
-mkdir data
-py -m flashcards.update_database create
-```
-
 ## Usage
 Using terminal (at project root):
 ```shell
