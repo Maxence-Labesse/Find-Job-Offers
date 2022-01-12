@@ -1,1 +1,1 @@
-__all__ = ['job_scraping_app', 'indeed_scraping']
+__all__ = ['app_front', 'offers_scraping']
