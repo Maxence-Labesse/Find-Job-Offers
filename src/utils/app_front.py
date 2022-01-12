@@ -7,7 +7,7 @@ open_app:
 submit_offer_search:
     collect offers
 """
-from utils.ffers_scraping import collect_offers
+from offers_scraping import collect_offers
 from tkinter import *
 import tkinter.ttk as ttk
 from tkinter import messagebox

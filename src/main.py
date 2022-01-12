@@ -1,7 +1,7 @@
 """This is the main script of the job offers collecting software
 
 """
-from utils.app_front import open_app
+from src.utils.app_front import open_app
 
 
 def main():
