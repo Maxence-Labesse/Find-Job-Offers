@@ -40,6 +40,8 @@ py -m src.main time_between_offers=True
 * select output file folder and name in the app
 * add TOP (1/0) for keywords in offers
 
+## Meta
+
 LABESSE Maxence - maxence.labesse@yahoo.fr
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
