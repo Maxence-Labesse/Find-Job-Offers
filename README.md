@@ -30,11 +30,15 @@ Note: You can add time between web page requests using
 ```shell
 py -m src.main time_between_offers=True
 ```
+ 
 ## Release History
 * 0.0.1
     * First realease
 
-## Meta
+## Incoming changes
+
+* select output file folder and name in the app
+* add TOP (1/0) for keywords in offers
 
 LABESSE Maxence - maxence.labesse@yahoo.fr
 

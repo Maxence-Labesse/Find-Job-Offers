@@ -21,5 +21,5 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
     ],
-    packages=["flashcards.utils"]
+    packages=["src", "src.utils"]
 )
