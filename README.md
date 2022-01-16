@@ -46,4 +46,4 @@ LABESSE Maxence - maxence.labesse@yahoo.fr
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
 
-[https://github.com/Maxence-Labesse/Find-Job-Offers]()
+[https://github.com/Maxence-Labesse/Find-Job-Offers](https://github.com/Maxence-Labesse/Find-Job-Offers)
